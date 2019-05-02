@@ -227,6 +227,7 @@ class Tracer:
 
         now_string = datetime_module.datetime.now().time().isoformat()
         line_no = frame.f_lineno
+        file_name = frame.f_code.co_filename
         source_line = get_source_from_frame(frame)[line_no - 1]
 
         ### Dealing with misplaced function definition: #######################
@@ -251,7 +252,7 @@ class Tracer:
         #                                                                     #
         ### Finished dealing with misplaced function definition. ##############
 
-        self.write('{indent}{now_string} {event:9} '
+        self.write('{file_name} {indent} {event:9} '
                    '{line_no:4} {source_line}'.format(**locals()))
 
         if event == 'return':

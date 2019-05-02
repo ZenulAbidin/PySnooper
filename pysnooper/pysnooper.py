@@ -2,6 +2,7 @@
 # This program is distributed under the MIT license.
 
 import sys
+import logging
 
 from .third_party import decorator
 
@@ -13,8 +14,9 @@ from .tracer import Tracer
 def get_write_and_truncate_functions(output):
     if output is None:
         def write(s):
-            stderr = sys.stderr
-            stderr.write(s)
+            #stderr = sys.stderr
+            #stderr.write(s)
+            logging.debug(s)
         truncate = None
     elif isinstance(output, (pycompat.PathLike, str)):
         def write(s):
